@@ -23,7 +23,7 @@ For each gate, among the log's rows dated no later than the instant:
     out-of-tolerance;
   * otherwise, with no `red-capable` row it is lapsed; with one, it is
     current while the latest is no older than the gate's interval, stale
-    for the grace after that, and lapsed from then on.
+    for the grace after that, and lapsed from then on, except as below.
 
 A RECORD YOU HOLD
 -----------------
@@ -78,6 +78,13 @@ STATE_RE = re.compile(r"^-\s+`([a-z-]+)`\s+—", re.M)
 #: The states this script computes. The policy must define exactly these.
 STATES = ("current", "stale", "lapsed", "out-of-tolerance")
 GOOD, BAD, VOID = "red-capable", "out-of-tolerance", "void"
+# Every calibration run starts with the operator's runtime's own check.
+# When that check is red the run proves nothing, and each of its rows is
+# void with evidence that begins with the words below. A gate that would
+# otherwise be current is then stale, from that row's instant: it was due
+# to be re-proven and could not be, and the policy does not call it
+# current (CALIBRATION.md, "The runtime's own check comes first").
+ENGINE_RED = "engine red:"
 OUTCOMES = (GOOD, BAD, VOID)
 
 
@@ -182,7 +189,13 @@ def states(gates, rows, at, grace_days):
         proven = instant(last_good)
         due = proven + datetime.timedelta(days=days)
         ends = due + datetime.timedelta(days=grace_days)
-        if at <= due:
+        red = [r["at"] for r in rows if r["gate"] == gate
+               and r["at"] <= stamp and r["outcome"] == VOID
+               and r["at"] > last_good
+               and (r.get("evidence") or "").startswith(ENGINE_RED)]
+        if at <= due and red:
+            out[gate] = ("stale", red[-1], last_good)
+        elif at <= due:
             out[gate] = ("current", None, last_good)
         elif at <= ends:
             out[gate] = ("stale", due.strftime(FMT), last_good)
@@ -290,6 +303,14 @@ def main(argv=None):
         if since:
             detail += "; %s since %s" % (state, since)
         print("  %-*s  %-16s  %s" % (width, gate, state, detail))
+    red = sorted(set(r["at"] for r in rows if r["at"] <= when
+                     and r["outcome"] == VOID
+                     and (r.get("evidence") or "").startswith(ENGINE_RED)))
+    if red:
+        print("Note: the run at %s found the operator's runtime failing its "
+              "own check, so it proved nothing; a gate it could not re-prove "
+              "is shown stale, not current, until a later run proves it."
+              % red[-1])
     counts = dict((s, sum(1 for v in result.values() if v[0] == s))
                   for s in STATES)
     summary = ", ".join("%d %s" % (counts[s], s) for s in STATES)

@@ -1,6 +1,6 @@
 # The calibration and lapse policy
 
-Version 3 · effective 2026-09-23 · supersedes: Version 2 (effective 2026-09-22)
+Version 4 · effective 2026-09-25 · supersedes: Version 3 (effective 2026-09-23)
 
 Every gate in this runtime is inspection equipment (`docs/INSTRUMENT.md`). It
 is worth relying on only while there is a dated record showing it could still
@@ -38,6 +38,17 @@ proven on the calendar like every other gate. A run that stops on it has
 found the gate unable to detect what it was proven to detect: that is a
 failed proof, and the section below applies to it as it does to any other.
 
+## The runtime's own check comes first
+
+A gate is part of a runtime, and a proof run on a runtime that fails its own
+check says nothing about the runtime anyone relies on. So every calibration
+run starts with that check: everything `make check` runs except
+`gate-calibration`, which reads this log and would otherwise let a lapsed
+gate keep the check red and block the run that re-proves it. If the check is
+red, no control is run, every gate's row for that run is `void`, and its
+evidence begins `engine red:` and names the first failure. If it is green,
+every row's evidence says so and names the commit it ran at.
+
 ## Interval and grace
 
 Every gate is re-proven at least every **30 days**, whether or not anything
@@ -57,7 +68,9 @@ exactly the states `make gate-calibration` can report.
 
 - `current` — the last proof went red where it should, and is no older than
   the interval. Records may be issued.
-- `stale` — the last proof is past the interval but inside the grace. Records
+- `stale` — the last proof is past the interval but inside the grace, or
+  it is inside the interval and a later run found the runtime's own check
+  red, in which case the gate is stale from that run's instant. Records
   may still be issued, and each one says which gates were stale when it was
   issued and since when. Nothing is withdrawn: the equipment was not found
   wrong, only not yet re-checked.
@@ -123,6 +136,13 @@ exists to prevent. The text under the version line is pinned by digest in
 `contract/document-versions.csv` beside the version the line states, so an
 amendment moves the digest and cannot leave the version behind.
 
+- **Version 4**, effective 2026-09-25, adds "The runtime's own check comes
+  first" and one case to `stale`. Until then a run proved each gate on its
+  own, so the published table could show every gate current while the
+  runtime's own check was red, as it was from 2026-09-23 to 2026-09-25, and
+  a reader had no way to see it. Now a run on a red runtime is void and
+  says why, and a gate it could not re-prove is stale, not current. No
+  interval, grace or other consequence changed.
 - **Version 3**, effective 2026-09-23, changes wording only. Version 2 said
   the policy was published before the first calibration entry was written;
   the public repository was created after the first proofs had been run, so
