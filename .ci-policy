@@ -1,0 +1,4 @@
+# Every commit here is written by the operator's weekly run. The guard holds
+# the identity to that rather than trusting the script to get it right.
+AUTHOR_NAME=ashfordeOU
+AUTHOR_EMAIL=contact@ashforde.org

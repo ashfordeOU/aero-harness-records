@@ -1,0 +1,198 @@
+{
+ "format": "family@1",
+ "generated_from": "contract/family.csv, contract/family-links.csv and contract/glossary.csv in the runtime",
+ "glossary": [
+  {
+   "expansion": "Edwards-curve Digital Signature Algorithm using Curve25519",
+   "means": "The signature algorithm the issuing key uses.",
+   "term": "Ed25519"
+  },
+  {
+   "expansion": "Secure Hash Algorithm 256-bit",
+   "means": "A function that turns any file into a 64-character fingerprint. Two different files practically never share one, so quoting the fingerprint pins the file.",
+   "term": "SHA-256"
+  }
+ ],
+ "links": [
+  {
+   "flows": "Each role's bound leaf skills",
+   "held_red_by": [
+    "gate-bindings"
+   ],
+   "pinned_by": "Slug resolution in the skills corpus",
+   "source": "roles",
+   "target": "skills",
+   "visibility": "public"
+  },
+  {
+   "flows": "The corpus, handed in by path at issue time",
+   "held_red_by": [
+    "determinism",
+    "gate-isolation"
+   ],
+   "pinned_by": "Content hash recorded in the record's corpora field",
+   "source": "skills",
+   "target": "harness",
+   "visibility": "public-to-private"
+  },
+  {
+   "flows": "The roles and the tools they request",
+   "held_red_by": [
+    "gate-permissions"
+   ],
+   "pinned_by": "Reconciled to the smaller of the ceiling and the request",
+   "source": "roles",
+   "target": "harness",
+   "visibility": "public-to-private"
+  },
+  {
+   "flows": "The attestation format and the Ed25519 signing code",
+   "held_red_by": [
+    "gate-spec"
+   ],
+   "pinned_by": "Handed in by path and never copied in; the verifier kit copies it at build time",
+   "source": "skills",
+   "target": "harness",
+   "visibility": "public-to-private"
+  },
+  {
+   "flows": "The published specification directory: the specification, the specimen record and the trust anchor",
+   "held_red_by": [
+    "gate-spec-mirror"
+   ],
+   "pinned_by": "Byte-for-byte copy with published SHA-256 sums",
+   "source": "harness",
+   "target": "skills",
+   "visibility": "private-to-public"
+  },
+  {
+   "flows": "The published specification directory",
+   "held_red_by": [
+    "conformance-suite-ci"
+   ],
+   "pinned_by": "SHA-256 sums; the suite pins the specification it grades",
+   "source": "skills",
+   "target": "conformance",
+   "visibility": "public"
+  },
+  {
+   "flows": "The held-out negative controls",
+   "held_red_by": [
+    "gate-heldout"
+   ],
+   "pinned_by": "One digest per gate target in contract/heldout.csv",
+   "source": "controls",
+   "target": "harness",
+   "visibility": "private"
+  },
+  {
+   "flows": "The calibration registry, the dated proof log, the countermand policy and the public evidence log",
+   "held_red_by": [
+    "gate-records-mirror",
+    "records-verify-ci"
+   ],
+   "pinned_by": "Rebuilt from the tree; published SHA-256 sums",
+   "source": "harness",
+   "target": "records",
+   "visibility": "private-to-public"
+  },
+  {
+   "flows": "Requirement identifiers, never requirement text",
+   "held_red_by": [
+    "trace",
+    "gate-claims"
+   ],
+   "pinned_by": "The export's own SHA-256; each reader regenerates the index",
+   "source": "requirement-export",
+   "target": "harness",
+   "visibility": "outside"
+  },
+  {
+   "flows": "Time-stamp tokens, and qualified status read from a national trusted list",
+   "held_red_by": [
+    "verify-timestamp",
+    "tsa-probe"
+   ],
+   "pinned_by": "An anchor file of authority certificates; trusted-list units",
+   "source": "time-stamp-authorities",
+   "target": "harness",
+   "visibility": "outside"
+  },
+  {
+   "flows": "The customer's own matrices, and the observation archive on exit",
+   "held_red_by": [
+    "matrix"
+   ],
+   "pinned_by": "Published requirement identifiers; the exit formats the engagement terms document",
+   "source": "harness",
+   "target": "customer-matrix",
+   "visibility": "per-engagement"
+  }
+ ],
+ "repositories": [
+  {
+   "holds": "The corpus of leaf skills, the published specification directory and the sealing code",
+   "key": "skills",
+   "repository": "aero-agent-skills",
+   "url": "https://github.com/ashfordeOU/aero-agent-skills",
+   "visibility": "public"
+  },
+  {
+   "holds": "The engineering roles and the leaf skills each one binds",
+   "key": "roles",
+   "repository": "aero-agent-roles",
+   "url": "https://github.com/ashfordeOU/aero-agent-roles",
+   "visibility": "public"
+  },
+  {
+   "holds": "The calibration registry, the dated log of every proof, and the public evidence log",
+   "key": "records",
+   "repository": "aero-harness-records",
+   "url": "https://github.com/ashfordeOU/aero-harness-records",
+   "visibility": "public"
+  },
+  {
+   "holds": "The test suite that grades an implementation against the published specification",
+   "key": "conformance",
+   "repository": "arcs-conformance",
+   "url": "https://github.com/ashfordeOU/arcs-conformance",
+   "visibility": "public"
+  },
+  {
+   "holds": "The runtime: the execution engine, the confinement, the reviewer and the issuance machinery",
+   "key": "harness",
+   "visibility": "private"
+  },
+  {
+   "holds": "The held-out negative controls, kept apart from the gates they grade",
+   "key": "controls",
+   "visibility": "private"
+  },
+  {
+   "holds": "The market analysis and the route-to-market note, kept apart from every product's source",
+   "key": "commercial",
+   "visibility": "private"
+  },
+  {
+   "holds": "The European Space Agency's published export mapping requirement identifiers to clauses. Not ours, never republished",
+   "key": "requirement-export",
+   "repository": "European Space Agency requirement export",
+   "url": "https://ecss.nl/",
+   "visibility": "outside"
+  },
+  {
+   "holds": "Outside services that sign a statement that a digest existed at an instant, and the national trusted list that names the qualified ones",
+   "key": "time-stamp-authorities",
+   "repository": "Time-stamp authorities",
+   "url": "",
+   "visibility": "outside"
+  },
+  {
+   "holds": "The applicability, compliance and verification matrices a customer already keeps. Not ours, and never held here",
+   "key": "customer-matrix",
+   "repository": "The customer's matrix",
+   "url": "",
+   "visibility": "outside"
+  }
+ ]
+}

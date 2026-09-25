@@ -1,0 +1,42 @@
+# Checks that these records are intact and that the evidence log holds, on
+# every push and once a week, with nothing but the tools a clean machine
+# has. The same commands are in the README, for anyone to run.
+name: verify
+
+on:
+  push:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Every file is the one SHA256SUMS names
+        shell: bash
+        run: shasum -a 256 -c SHA256SUMS
+
+      - name: Nothing is here that SHA256SUMS does not name
+        shell: bash
+        run: python3 verify/verify_files.py .
+
+      - name: The evidence log holds, end to end
+        shell: bash
+        run: python3 verify/verify_log.py log/
+
+      # Informational: a lapsed or out-of-tolerance gate is a fact about the
+      # operator's instrument, not a defect in these files, so it marks this
+      # step and does not fail the job.
+      - name: Each gate's state today, by the published policy
+        shell: bash
+        continue-on-error: true
+        run: python3 verify/gate_states.py | tee -a "$GITHUB_STEP_SUMMARY"

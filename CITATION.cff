@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use these records, please cite them as below, with the commit or the date of the state you used: they change every week."
+type: dataset
+title: "Aero Harness operator records"
+abstract: >-
+  The public records of the Aero Harness, the private inspection runtime of
+  Ashforde OÜ (osaühing: a private limited company registered in Estonia).
+  The calibration record lists every automated check of the runtime (each
+  called a gate), its re-proof interval and its controls, and every dated
+  proof that the gate could still fail on a planted defect. The evidence
+  log is an append-only Merkle-tree log of commitments to the records the
+  runtime issues, in weekly timestamped checkpoints. They are published so
+  that they can be checked rather than trusted. Every control is written by
+  the operator: this is self-calibration, and it is not a certification.
+  The records are licensed under Creative Commons Attribution 4.0
+  International, and the verifier published with them under the Apache
+  License, Version 2.0.
+authors:
+  - name: "Ashforde OÜ"
+    address: "Ahtri tn 12, Kesklinna linnaosa"
+    city: "Tallinn"
+    post-code: "15551"
+    country: "EE"
+    email: "contact@ashforde.org"
+    website: "https://ashforde.org"
+url: "https://github.com/ashfordeOU/aero-harness-records"
+repository-code: "https://github.com/ashfordeOU/aero-harness-records"
+license:
+  - CC-BY-4.0
+  - Apache-2.0
+version: "2026-09-24"
+date-released: "2026-09-24"
+keywords:
+  - calibration
+  - inspection
+  - product assurance
+  - evidence log
+  - transparency log
+  - Merkle tree
+  - Certificate Transparency
+  - trusted timestamping
+  - aerospace

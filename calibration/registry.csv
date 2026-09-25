@@ -1,0 +1,45 @@
+# The calibration registry: every gate, how often it must be proven
+# able to go red again, and the control that proves it.
+#
+# `make calibrate AT=<instant>` runs every control here and appends one dated
+# row per gate to records/calibration-log.csv. `make gate-calibration` reads
+# the two together and goes red when a gate's last good proof is older than
+# its interval plus the grace docs/CALIBRATION.md allows, or when its latest
+# proof failed. Every gate the Makefile runs has exactly one row here, and
+# `make gate-calibration` refuses the registry when that stops being true.
+#
+# Every control is written by the same hand as the gate it proves. That is
+# self-calibration, and docs/INSTRUMENT.md says so. Held-out controls, where
+# they exist, are listed too; they are the start of the independent kind.
+#
+# controls: one or more of suite:<test file>, script:<control script>,
+# plants:<gate>, heldout:<gate>, separated by ";". A held-out control runs
+# from the separate controls repository named by $AERO_CONTROLS.
+gate,interval_days,controls
+gate-version,30,plants:gate-version;heldout:gate-version
+gate-workorder,30,suite:tests/test_workorder.py;heldout:gate-workorder
+gate-claims,30,suite:tests/test_claims.py;heldout:gate-claims
+gate-qualification,30,suite:tests/test_qualification.py;heldout:gate-qualification
+gate-identifiers,30,suite:tests/test_families.py;heldout:gate-identifiers
+gate-spec,30,suite:tests/test_spec.py;heldout:gate-spec
+gate-spec-mirror,30,suite:tests/test_spec_bundle.py;heldout:gate-spec-mirror
+gate-records-mirror,30,suite:tests/test_records_bundle.py;heldout:gate-records-mirror
+gate-countermand,30,suite:tests/test_countermand.py;heldout:gate-countermand
+gate-copy,30,suite:tests/test_copy_vocabulary.py;heldout:gate-copy
+gate-retired,30,suite:tests/test_retired_names.py;heldout:gate-retired
+gate-family,30,suite:tests/test_family.py;heldout:gate-family
+gate-governance,30,suite:tests/test_governance.py;heldout:gate-governance
+gate-calibration,30,suite:tests/test_calibration.py;heldout:gate-calibration
+gate-isolation,30,suite:tests/test_no_corpus_literals.py;heldout:gate-isolation
+gate-manifest,30,suite:tests/test_manifest.py;heldout:gate-manifest
+gate-contract,30,suite:tests/test_contract_gate.py;heldout:gate-contract
+gate-imports,30,suite:tests/test_imports_gate.py;heldout:gate-imports
+gate-shadow,30,suite:tests/test_no_stdlib_shadow.py;heldout:gate-shadow
+gate-sandbox,30,script:tools/negative_controls/sandbox_control.sh;suite:tests/test_sandbox.py;heldout:gate-sandbox
+gate-membrane,30,script:tools/negative_controls/membrane_control.sh;suite:tests/test_membrane.py;heldout:gate-membrane
+gate-reviewer,30,plants:gate-reviewer;heldout:gate-reviewer
+gate-provenance,30,script:tools/negative_controls/provenance_control.sh;heldout:gate-provenance
+gate-heldout,30,plants:gate-heldout;heldout:gate-heldout
+gate-swap,30,suite:tests/test_swap.py;heldout:gate-swap
+gate-bindings,30,plants:gate-bindings;heldout:gate-bindings
+gate-permissions,30,suite:tests/test_permissions_gate.py;heldout:gate-permissions

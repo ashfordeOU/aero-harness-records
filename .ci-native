@@ -1,0 +1,6 @@
+# The local gate for these records: the same three commands the workflow
+# runs, and the same three the README gives a reader. A push that cannot
+# pass them publishes records that do not verify.
+shasum -a 256 -c SHA256SUMS
+python3 verify/verify_files.py .
+python3 verify/verify_log.py log/

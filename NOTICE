@@ -1,0 +1,34 @@
+Aero Harness operator records
+Copyright 2026 Ashforde OÜ (osaühing: a private limited company
+registered in Estonia)
+
+This repository holds the records Ashforde OÜ publishes about the Aero
+Harness, the private inspection runtime it operates, and a verifier for
+them. It is built by that runtime and never edited by hand.
+
+The records -- CALIBRATION.md, calibration/, log/, README.md, assets/,
+CITATION.cff, NOTICE, SHA256SUMS and the documents at the root that
+Ashforde OÜ wrote (LICENSING.md, SECURITY.md, CONTRIBUTING.md) -- are
+licensed under the Creative Commons Attribution 4.0 International licence
+(CC BY 4.0). Its legal code is in LICENSE.
+
+The verifier and the automation --
+verify/, .github/, .gitattributes, .ci-native and .ci-policy --
+are licensed under the Apache License, Version 2.0 (Apache-2.0). Its
+text is in LICENSES/Apache-2.0.txt.
+
+CODE_OF_CONDUCT.md is the Contributor Covenant, version 2.1, used under its
+own terms.
+
+LICENSING.md says which licence covers which file, in plain language.
+
+Attribute the records as: Ashforde OÜ, Aero Harness operator records,
+https://github.com/ashfordeOU/aero-harness-records
+
+No licence here grants any right to use the names "Aero Harness", "ARCS"
+(the Agent Run Conformance Specification) or "Ashforde", or any
+mark.
+
+Ashforde OÜ, private limited company, Estonia, registry code 17321180
+Ahtri tn 12, Kesklinna linnaosa, 15551 Tallinn, Harju maakond, Estonia
+contact@ashforde.org · https://ashforde.org

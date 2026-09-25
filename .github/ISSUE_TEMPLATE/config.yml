@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report privately
+    url: https://github.com/ashfordeOU/aero-harness-records/blob/main/SECURITY.md
+    about: A record you hold, a way to defeat the published checks, or anything that should not be public. Email contact@ashforde.org with "RECORDS" in the subject; SECURITY.md has the detail.
+  - name: About Ashforde OÜ
+    url: https://ashforde.org
+    about: Ashforde OÜ (osaühing, a private limited company registered in Estonia) operates the Aero Harness, the private inspection runtime whose records these are.

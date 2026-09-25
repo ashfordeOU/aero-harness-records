@@ -1,0 +1,24 @@
+name: Ask a question or suggest an improvement
+description: A question about how to read these records, or an improvement to the verifier or to this page.
+title: "Question: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        These are the records Ashforde OÜ (osaühing, a private limited company registered in Estonia) publishes about the Aero Harness, its private inspection runtime. Every file here is generated, so a change is made at its source and arrives in the next build; CONTRIBUTING.md says more.
+
+        **Do not post a record, its serial (its `record_id`), its salt or the instant it was issued here.** Anything about a record you hold goes to the private channel in SECURITY.md: email contact@ashforde.org with "RECORDS" in the subject. If something here disagrees with itself, the discrepancy form asks for what is needed to check it.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question or suggestion
+      description: Say which file or section it is about. A proposed change to the verifier may be pasted here; it is offered under the Apache License, Version 2.0 (Apache-2.0), as its section 5 provides, unless you explicitly state otherwise.
+    validations:
+      required: true
+  - type: checkboxes
+    id: private
+    attributes:
+      label: Nothing private
+      options:
+        - label: This contains no record, serial, salt, issued_at instant or other private information.
+          required: true

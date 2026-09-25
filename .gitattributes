@@ -1,0 +1,4 @@
+# Every file here is published byte for byte, and SHA256SUMS names each
+# file's bytes. Check every file out exactly as it was committed, on every
+# platform: a checkout that rewrote line endings would fail every sum.
+* -text

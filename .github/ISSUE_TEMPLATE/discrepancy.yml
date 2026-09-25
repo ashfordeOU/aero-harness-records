@@ -1,0 +1,55 @@
+name: Report a discrepancy
+description: Something in these records disagrees with itself, with the published policy, or with what the checks here say.
+title: "Discrepancy: "
+labels: ["discrepancy"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for checking. These are the records Ashforde OÜ (osaühing, a private limited company registered in Estonia) publishes about the Aero Harness, its private inspection runtime, so that anyone can find what is wrong with them.
+
+        **Do not post a record, its serial (its `record_id`), its salt or the instant it was issued here.** A record you hold, or anything that should not be public, goes to the private channel in SECURITY.md: email contact@ashforde.org with "RECORDS" in the subject. That includes a record whose calibration annex (the state of every gate at its issue, which the record carries) disagrees with the log, since the output names the instant the record was issued.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of discrepancy
+      options:
+        - A file does not match SHA256SUMS
+        - The evidence log does not verify (verify/verify_log.py)
+        - A gate's state disagrees with the policy (verify/gate_states.py)
+        - The README states something the files do not support
+        - A row of the calibration log or the registry looks wrong
+        - The verifier passes a log it should refuse, or refuses one it should pass
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit you checked
+      description: The output of `git rev-parse HEAD` in your clone.
+      placeholder: 0123abcd...
+    validations:
+      required: true
+  - type: textarea
+    id: ran
+    attributes:
+      label: What you ran, and what it printed
+      description: The exact command and its full output. It is rendered as plain text.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead, and why
+      description: Point to the file, section or line that says what should have happened.
+    validations:
+      required: true
+  - type: checkboxes
+    id: private
+    attributes:
+      label: Nothing private
+      options:
+        - label: This report contains no record, serial, salt, issued_at instant or other private information.
+          required: true
