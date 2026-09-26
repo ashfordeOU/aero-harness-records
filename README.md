@@ -242,13 +242,12 @@ checked against that checkpoint's root. Everything happens on your machine.
 
 To try it on a published record: ARCS-1 is published with a specimen,
 a record issued only to show the format, and the specimen was committed
-to this log at checkpoint 3. These two commands download it from Aero Agent
-Skills, Ashforde OÜ's public library of aerospace engineering knowledge
-packaged as skills for software agents, where ARCS-1 is published, and
+to this log at checkpoint 3. These two commands download it from the
+repository where ARCS-1 is published beside its conformance suite, and
 prove it is in this log:
 
 ```sh
-curl -sLO https://raw.githubusercontent.com/ashfordeOU/aero-agent-skills/main/spec/specimen/aero-capability-dossier.json
+curl -sLO https://raw.githubusercontent.com/ashfordeOU/arcs-conformance/main/spec/specimen/aero-capability-dossier.json
 python3 verify/verify_log.py log/ --record aero-capability-dossier.json
 ```
 
@@ -712,11 +711,15 @@ a conformance claim issued by the runtime is made of, in a format it calls
 claim@1 (the conformance claim format, version 1), and how a stranger checks
 one without the runtime: its attestation, its trust anchor, its standing.
 Its editions are dated clarifications that never change what conforms (the
-current one is 2026-09-24); a change to what conforms would be a new
-specification, ARCS-2. It is published in Aero Agent Skills — Ashforde OÜ's
-public library of aerospace engineering knowledge, packaged as skills that
-software agents load when a task needs them — under its own terms, with a
-specimen record; a conformance suite for it is published separately. See
+current one is 2026-09-26); a change to what conforms would be a new
+specification, ARCS-2. It is the aerospace profile of Trust, Runtime
+Attestation and Compliance Evidence (TRACE), the open specification for
+signed evidence about what a software agent ran. ARCS-1 defers to TRACE for
+everything TRACE defines, and adds only the gate verdicts, the named person
+who signs off, and the exact corpus and harness versions. Its one canonical
+copy is published in [arcs-conformance](https://github.com/ashfordeOU/arcs-conformance),
+beside the conformance suite that grades an implementation against it,
+under its own terms, with a specimen record. See
 [Related repositories](#related-repositories).
 
 **Why CC BY 4.0 for the records and Apache-2.0 for the verifier?**
@@ -779,7 +782,7 @@ Every term of art on this page, in plain words.
 | **salt** | A value written into a record when it is issued, computed with a key only the operator holds. Without it a record's leaf cannot be found in the log, so only the holder of the record can find it. |
 | **self-calibration** | Calibration against reference defects chosen by the maker of the instrument rather than by an independent party. Every control here is written by the operator, so these records are self-calibration, and they say so. |
 | **serial** | A record's identifier, its `record_id`: derived from the record's own content, never assigned, and the value that appears on the record. A serial alone cannot be looked up in the evidence log. |
-| **skill** | A packaged piece of engineering knowledge that a software agent loads when a task needs it. Aero Agent Skills publishes them. |
+| **skill** | A packaged piece of engineering knowledge that a software agent loads when a task needs it. Aero Agent Skills, Ashforde OÜ's public library of aerospace engineering knowledge, publishes them. |
 | **specimen** | A record issued only to show the format, marked as a specimen and signed with a key kept apart from real ones. ARCS-1 publishes one. |
 | **standing** | Whether a record already issued is still in force: in good standing, superseded by a later record, or withdrawn. The issuer states it in a signed status list, never in the record itself. |
 | **status list** | A signed list in which the issuer states which of its records have since been superseded or withdrawn. Each checkpoint names the digest of the list in force when it was made; the list is not published here. |
@@ -796,11 +799,11 @@ out.
 | short form or name | stands for |
 |---|---|
 | Aero Agent Roles | Ashforde OÜ's public role layer, which binds Aero Agent Skills into end-to-end engineering deliverables |
-| Aero Agent Skills | Ashforde OÜ's public library of aerospace engineering knowledge, packaged as skills that software agents load when a task needs them; ARCS-1 is published in it |
+| Aero Agent Skills | Ashforde OÜ's public library of aerospace engineering knowledge, packaged as skills that software agents load when a task needs them |
 | Aero Harness | Ashforde OÜ's inspection runtime: the software that runs the gates and issues records. It is private |
 | Apache-2.0 | the Apache License, Version 2.0, the licence of the verifier |
 | ARCS | the Agent Run Conformance Specification |
-| ARCS-1 | the Agent Run Conformance Specification, number 1: the published format of the conformance claims the Aero Harness issues, and how anyone checks one. Its editions are dated clarifications that never change what conforms (the current one is 2026-09-24) |
+| ARCS-1 | the Agent Run Conformance Specification, number 1: the aerospace profile of TRACE, and the published format of the conformance claims the Aero Harness issues, and how anyone checks one. Its editions are dated clarifications that never change what conforms (the current one is 2026-09-26) |
 | ARCS-2 | the name a second Agent Run Conformance Specification would take: a change to what conforms under ARCS-1 is not an edition of it but a new specification. There is none |
 | ASCII | American Standard Code for Information Interchange: the basic Latin letters, digits and punctuation |
 | CC BY 4.0 | Creative Commons Attribution 4.0 International, the licence of the records |
@@ -824,6 +827,7 @@ out.
 | RSA | Rivest-Shamir-Adleman, a public-key signature scheme |
 | SHA-256 | Secure Hash Algorithm 256-bit: a hash function that turns any bytes into a short digest of fixed length, which changes completely if one byte changes |
 | SVG | Scalable Vector Graphics: an image format written as text |
+| TRACE | the Trust, Runtime Attestation and Compliance Evidence |
 | TSA | time-stamping authority: an independent service that issues signed timestamps |
 | URL | uniform resource locator: a web address |
 | UTC | Coordinated Universal Time |
@@ -883,22 +887,21 @@ This repository is one of a family. Each connection below is pinned by
 a digest, a signature or a byte-for-byte copy, and a named check goes red
 when a pin breaks.
 
-- **[aero-agent-skills](https://github.com/ashfordeOU/aero-agent-skills)** &mdash; The corpus of leaf skills, the published specification directory and the sealing code
+- **[aero-agent-skills](https://github.com/ashfordeOU/aero-agent-skills)** &mdash; The corpus of leaf skills and the sealing code
 - **[aero-agent-roles](https://github.com/ashfordeOU/aero-agent-roles)** &mdash; The engineering roles and the leaf skills each one binds
-- **[arcs-conformance](https://github.com/ashfordeOU/arcs-conformance)** &mdash; The test suite that grades an implementation against the published specification
+- **[arcs-conformance](https://github.com/ashfordeOU/arcs-conformance)** &mdash; ARCS-1, the Agent Run Conformance Specification, which is the aerospace profile of Trust, Runtime Attestation and Compliance Evidence (TRACE): its one canonical copy, and the test suite that grades an implementation against it
 
 ### What connects it
 
 | Between | What flows | Held red by |
 |---|---|---|
-| aero-harness to aero-harness-records | The calibration registry, the dated proof log, the countermand policy and the public evidence log | `gate-records-mirror`, `records-verify-ci` |
+| the runtime (private) to aero-harness-records | The calibration registry, the dated proof log, the countermand policy and the public evidence log | `gate-records-mirror`, `records-verify-ci` |
 
 Each connection carries a number in the runtime's own map, used to
 cross-reference it. The numbers are left out here because nothing a
 reader of this page can follow them to.
 
-A glossary of every abbreviation used here is in the specification
-directory that ships beside the corpus.
+Every abbreviation used here is spelled out in the glossary on this page.
 <!-- family:end -->
 
 ---

@@ -11,6 +11,11 @@
    "expansion": "Secure Hash Algorithm 256-bit",
    "means": "A function that turns any file into a 64-character fingerprint. Two different files practically never share one, so quoting the fingerprint pins the file.",
    "term": "SHA-256"
+  },
+  {
+   "expansion": "Trust, Runtime Attestation and Compliance Evidence",
+   "means": "The open specification for a signed record of what a software agent ran, where, under which policy and calling which tools. The Agent Run Conformance Specification, ARCS-1, is a profile of it and adds only what an aerospace claim needs.",
+   "term": "TRACE"
   }
  ],
  "links": [
@@ -56,23 +61,24 @@
    "visibility": "public-to-private"
   },
   {
-   "flows": "The published specification directory: the specification, the specimen record and the trust anchor",
+   "flows": "The canonical specification directory: the specification, the specimen record and the trust anchor",
    "held_red_by": [
-    "gate-spec-mirror"
+    "gate-spec-mirror",
+    "conformance-suite-ci"
    ],
-   "pinned_by": "Byte-for-byte copy with published SHA-256 sums",
+   "pinned_by": "Byte-for-byte copy with published SHA-256 sums; the suite pins the SHA-256 of the text it grades",
    "source": "harness",
-   "target": "skills",
+   "target": "conformance",
    "visibility": "private-to-public"
   },
   {
-   "flows": "The published specification directory",
+   "flows": "Where the canonical specification lives: named in the related-repositories block, and in a pointer file carrying one edition and its SHA-256",
    "held_red_by": [
-    "conformance-suite-ci"
+    "gate-family"
    ],
-   "pinned_by": "SHA-256 sums; the suite pins the specification it grades",
-   "source": "skills",
-   "target": "conformance",
+   "pinned_by": "The block is rendered from this map; an edition's SHA-256 never changes once it is published",
+   "source": "conformance",
+   "target": "skills",
    "visibility": "public"
   },
   {
@@ -131,7 +137,7 @@
  ],
  "repositories": [
   {
-   "holds": "The corpus of leaf skills, the published specification directory and the sealing code",
+   "holds": "The corpus of leaf skills and the sealing code",
    "key": "skills",
    "repository": "aero-agent-skills",
    "url": "https://github.com/ashfordeOU/aero-agent-skills",
@@ -152,7 +158,7 @@
    "visibility": "public"
   },
   {
-   "holds": "The test suite that grades an implementation against the published specification",
+   "holds": "ARCS-1, the Agent Run Conformance Specification, which is the aerospace profile of Trust, Runtime Attestation and Compliance Evidence (TRACE): its one canonical copy, and the test suite that grades an implementation against it",
    "key": "conformance",
    "repository": "arcs-conformance",
    "url": "https://github.com/ashfordeOU/arcs-conformance",
