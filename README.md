@@ -21,16 +21,16 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/statline-dark.svg">
-    <img src="assets/statline.svg" alt="27 gates; 27 of 27 current as of the latest proof, 2026-09-28T04:17:05Z; 315 proofs on record; held-out controls on 27 of 27 gates; evidence log: 4 checkpoints and 64 leaves" width="100%">
+    <img src="assets/statline.svg" alt="27 gates; 27 of 27 current as of the latest proof, 2026-10-05T04:17:02Z; 342 proofs on record; held-out controls on 27 of 27 gates; evidence log: 5 checkpoints and 80 leaves" width="100%">
   </picture>
 </p>
 
 <p align="center">
-  <a href="#calibration"><img src="https://img.shields.io/badge/calibration-27%2F27_current_%C2%B7_2026--09--28-2ea043?style=flat&labelColor=1a1e35" alt="calibration: 27 of 27 gates current at the latest proof, 2026-09-28T04:17:05Z"></a>
-  <a href="calibration/log.csv"><img src="https://img.shields.io/badge/proofs-315_on_record-0ea5e9?style=flat&labelColor=1a1e35" alt="315 proofs on record"></a>
+  <a href="#calibration"><img src="https://img.shields.io/badge/calibration-27%2F27_current_%C2%B7_2026--10--05-2ea043?style=flat&labelColor=1a1e35" alt="calibration: 27 of 27 gates current at the latest proof, 2026-10-05T04:17:02Z"></a>
+  <a href="calibration/log.csv"><img src="https://img.shields.io/badge/proofs-342_on_record-0ea5e9?style=flat&labelColor=1a1e35" alt="342 proofs on record"></a>
   <a href="#held-out-controls"><img src="https://img.shields.io/badge/held--out_controls-27%2F27_gates-8b5cf6?style=flat&labelColor=1a1e35" alt="held-out controls on 27 of 27 gates"></a>
-  <a href="log/"><img src="https://img.shields.io/badge/evidence_log-4_checkpoints_%C2%B7_64_leaves-ec4899?style=flat&labelColor=1a1e35" alt="evidence log: 4 checkpoints, 64 leaves"></a>
-  <a href="#timestamps"><img src="https://img.shields.io/badge/timestamped-4%2F4_checkpoints-f97316?style=flat&labelColor=1a1e35" alt="4 of 4 checkpoints timestamped"></a>
+  <a href="log/"><img src="https://img.shields.io/badge/evidence_log-5_checkpoints_%C2%B7_80_leaves-ec4899?style=flat&labelColor=1a1e35" alt="evidence log: 5 checkpoints, 80 leaves"></a>
+  <a href="#timestamps"><img src="https://img.shields.io/badge/timestamped-5%2F5_checkpoints-f97316?style=flat&labelColor=1a1e35" alt="5 of 5 checkpoints timestamped"></a>
 </p>
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/records-CC_BY_4.0-2ea043?style=flat&labelColor=1a1e35" alt="records licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)"></a>
@@ -85,7 +85,7 @@ Every file here is built by the runtime from its own tree, and nothing is
 edited by hand. A scheduled job on the operator's machine rebuilds and
 commits the set every week; the earliest commits here were made by hand,
 from the same build. The states on this page are as of the latest proof on
-record, **2026-09-28T04:17:05Z**. A page cannot know when it is read, so for a gate's
+record, **2026-10-05T04:17:02Z**. A page cannot know when it is read, so for a gate's
 state today, run `python3 verify/gate_states.py`, which applies the
 published policy to the log at the moment you run it.
 
@@ -294,7 +294,7 @@ For each stamped checkpoint this writes the token to a file and prints the
 command that checks it, of the form:
 
 ```sh
-openssl ts -verify -digest <checkpoint digest> -in "$tokens/checkpoint-4.tst" -token_in \
+openssl ts -verify -digest <checkpoint digest> -in "$tokens/checkpoint-5.tst" -token_in \
   -CAfile <your trusted root certificates>
 ```
 
@@ -352,42 +352,42 @@ gate that reported on something it did not check.
 
 ### Each gate as of the latest proof
 
-State of each gate **as of the latest proof on record, 2026-09-28T04:17:05Z**; for a
+State of each gate **as of the latest proof on record, 2026-10-05T04:17:02Z**; for a
 gate's state today, run `python3 verify/gate_states.py`. Each gate's
 controls are named as the registry names them (see
 [Reading the registry](#reading-the-registry)).
 
-| gate | what it checks | state at 2026-09-28 | last proven | proofs | interval | controls |
+| gate | what it checks | state at 2026-10-05 | last proven | proofs | interval | controls |
 |---|---|---|---|---:|---:|---|
-| `gate-version` | The runtime's three version labels — its own version, the edition of the specification it implements, and the format of the claims it issues — are each well formed. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `plants` + `heldout` |
-| `gate-workorder` | Every item of work this operator has taken on is listed in one register, each with the state it is in and, where it is unfinished, the named act it is waiting on and who has to perform it. Work that depends on somebody outside this company is recorded as waiting on that person, and is never recorded as finished. | current | 2026-09-28T04:17:05Z | 8 | 30 days | `suite` + `heldout` |
-| `gate-claims` | Every figure the runtime's own documentation states, such as how many tests or gates there are, is recounted from the source and agrees. | current | 2026-09-28T04:17:05Z | 14 | 30 days | `suite` + `heldout` |
-| `gate-qualification` | The kit that says what this tool has to do, and how each of those was checked, still describes the whole tool: every check the runtime runs is named in it, and a check added without being placed there is refused. The kit states what the tool is known not to do, each limitation naming the act that would end it, and no sentence in it claims that anybody outside this company has accepted the tool for use. Nobody has, and the sentence shapes that would claim it are refused here and everywhere else this operator writes. | current | 2026-09-28T04:17:05Z | 6 | 30 days | `suite` + `heldout` |
-| `gate-identifiers` | Published requirement and objective numbers from more than one standards family can be carried by a record. For one family a free export of every requirement exists, so a citation either resolves against a list a reader builds from their own copy or is reported as not found. For the others no such list exists that this operator can hold, so a citation is checked for shape, carried exactly as it was written, and kept in a separate count that is never added to the first. No file anywhere in the runtime holds a sentence of a published standard: the words belong to the body that issued them, and this check reads every file for them. | current | 2026-09-28T04:17:05Z | 6 | 30 days | `suite` + `heldout` |
-| `gate-spec` | The published specification, ARCS-1, still describes what the runtime does: its field tables, its test vectors and its worked example all match the code. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-spec-mirror` | The public copy of the specification is exactly what the runtime builds, byte for byte, with nothing missing and nothing extra. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-records-mirror` | This repository is exactly what the runtime builds, byte for byte, with nothing missing and nothing extra. | current | 2026-09-28T04:17:05Z | 12 | 30 days | `suite` + `heldout` |
-| `gate-countermand` | The published policy for withdrawing records already issued still matches the code that withdraws them, with a deadline for every trigger. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-copy` | No sentence the runtime shows a customer asks them to trust a machine-learning model in place of the deterministic checks; the refused phrasings are kept as data, each with an example it must catch. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-retired` | A name the operator has retired appears in no file and no path, in any spelling: upper or lower case, written as a character reference, or broken by a character that takes no room on the page. The name is kept only as a digest, so the list of retired names is not itself a place it survives, and the new name must be found, so a check that read the wrong files cannot pass. | current | 2026-09-28T04:17:05Z | 5 | 30 days | `suite` + `heldout` |
-| `gate-family` | The repositories this operator publishes are described in one place and rendered everywhere else. Every connection between them names the check that goes red when its pin breaks, and that name is resolved against the runtime, so a check cannot be renamed while the map describing it stays still. Every abbreviation a stranger meets in a public file is spelled out at its first use, or carries a written reason why it need not be. | current | 2026-09-28T04:17:05Z | 8 | 30 days | `suite` + `heldout` |
-| `gate-governance` | The runtime's governance document is consistent: every asset it lists is assigned to exactly one party, and none to a party the document says may not hold it. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-calibration` | Every gate has a good proof no older than its interval and grace, and no gate's latest proof failed: the policy on this page, applied inside the runtime. | current | 2026-09-28T04:17:05Z | 9 | 30 days | `suite` + `heldout` |
-| `gate-isolation` | The runtime's source names no particular corpus, so the content it inspects can change without the inspection software changing. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-manifest` | The runtime's declared list of its own parts matches its files both ways: nothing declared is missing, and nothing present is undeclared. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-contract` | The documents the runtime loads on every run are usable, not merely present: an empty or unreadable one is a finding. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-imports` | The runtime uses nothing but Python's standard library and its own code, so no check depends on a third-party package or a network service. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-shadow` | No file in the runtime is named after a module of Python's standard library, which would silently stand in for that module. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-sandbox` | Every permission granted to a program the runtime starts is enforced by the operating system, shown by running programs that try to exceed it. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `script` + `suite` + `heldout` |
-| `gate-membrane` | Material that only suggests what might be true is never counted as evidence: before any run starts, such material is planted in a throwaway copy of the evidence store, and both the check that traces evidence to its source and the step that merges findings must refuse it and name it as advice, each judged on its own. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `script` + `suite` + `heldout` |
-| `gate-reviewer` | The review step is independent of the work it reviews, and its code still does what its written specification says. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `plants` + `heldout` |
-| `gate-provenance` | A quotation in the evidence for a finding matches, exactly, something the runtime archived, and output the runtime captured itself is never reported as material somebody handed it. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `script` + `heldout` |
-| `gate-heldout` | No change has ever moved a gate and its held-out control together, and, when the controls are handed to it, each matches the SHA-256 digest it is pinned to. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `plants` + `heldout` |
-| `gate-swap` | The software that produces the work under inspection can be replaced by changing one line, and nothing else in the runtime changes. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
-| `gate-bindings` | Every skill a role says it relies on exists in the skills library the role is paired with. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `plants` + `heldout` |
-| `gate-permissions` | The tools each role asks for and the most the runtime ever allows reconcile: a role gets no more than both permit. | current | 2026-09-28T04:17:05Z | 13 | 30 days | `suite` + `heldout` |
+| `gate-version` | The runtime's three version labels — its own version, the edition of the specification it implements, and the format of the claims it issues — are each well formed. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `plants` + `heldout` |
+| `gate-workorder` | Every item of work this operator has taken on is listed in one register, each with the state it is in and, where it is unfinished, the named act it is waiting on and who has to perform it. Work that depends on somebody outside this company is recorded as waiting on that person, and is never recorded as finished. | current | 2026-10-05T04:17:02Z | 9 | 30 days | `suite` + `heldout` |
+| `gate-claims` | Every figure the runtime's own documentation states, such as how many tests or gates there are, is recounted from the source and agrees. | current | 2026-10-05T04:17:02Z | 15 | 30 days | `suite` + `heldout` |
+| `gate-qualification` | The kit that says what this tool has to do, and how each of those was checked, still describes the whole tool: every check the runtime runs is named in it, and a check added without being placed there is refused. The kit states what the tool is known not to do, each limitation naming the act that would end it, and no sentence in it claims that anybody outside this company has accepted the tool for use. Nobody has, and the sentence shapes that would claim it are refused here and everywhere else this operator writes. | current | 2026-10-05T04:17:02Z | 7 | 30 days | `suite` + `heldout` |
+| `gate-identifiers` | Published requirement and objective numbers from more than one standards family can be carried by a record. For one family a free export of every requirement exists, so a citation either resolves against a list a reader builds from their own copy or is reported as not found. For the others no such list exists that this operator can hold, so a citation is checked for shape, carried exactly as it was written, and kept in a separate count that is never added to the first. No file anywhere in the runtime holds a sentence of a published standard: the words belong to the body that issued them, and this check reads every file for them. | current | 2026-10-05T04:17:02Z | 7 | 30 days | `suite` + `heldout` |
+| `gate-spec` | The published specification, ARCS-1, still describes what the runtime does: its field tables, its test vectors and its worked example all match the code. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-spec-mirror` | The public copy of the specification is exactly what the runtime builds, byte for byte, with nothing missing and nothing extra. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-records-mirror` | This repository is exactly what the runtime builds, byte for byte, with nothing missing and nothing extra. | current | 2026-10-05T04:17:02Z | 13 | 30 days | `suite` + `heldout` |
+| `gate-countermand` | The published policy for withdrawing records already issued still matches the code that withdraws them, with a deadline for every trigger. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-copy` | No sentence the runtime shows a customer asks them to trust a machine-learning model in place of the deterministic checks; the refused phrasings are kept as data, each with an example it must catch. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-retired` | A name the operator has retired appears in no file and no path, in any spelling: upper or lower case, written as a character reference, or broken by a character that takes no room on the page. The name is kept only as a digest, so the list of retired names is not itself a place it survives, and the new name must be found, so a check that read the wrong files cannot pass. | current | 2026-10-05T04:17:02Z | 6 | 30 days | `suite` + `heldout` |
+| `gate-family` | The repositories this operator publishes are described in one place and rendered everywhere else. Every connection between them names the check that goes red when its pin breaks, and that name is resolved against the runtime, so a check cannot be renamed while the map describing it stays still. Every abbreviation a stranger meets in a public file is spelled out at its first use, or carries a written reason why it need not be. | current | 2026-10-05T04:17:02Z | 9 | 30 days | `suite` + `heldout` |
+| `gate-governance` | The runtime's governance document is consistent: every asset it lists is assigned to exactly one party, and none to a party the document says may not hold it. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-calibration` | Every gate has a good proof no older than its interval and grace, and no gate's latest proof failed: the policy on this page, applied inside the runtime. | current | 2026-10-05T04:17:02Z | 10 | 30 days | `suite` + `heldout` |
+| `gate-isolation` | The runtime's source names no particular corpus, so the content it inspects can change without the inspection software changing. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-manifest` | The runtime's declared list of its own parts matches its files both ways: nothing declared is missing, and nothing present is undeclared. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-contract` | The documents the runtime loads on every run are usable, not merely present: an empty or unreadable one is a finding. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-imports` | The runtime uses nothing but Python's standard library and its own code, so no check depends on a third-party package or a network service. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-shadow` | No file in the runtime is named after a module of Python's standard library, which would silently stand in for that module. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-sandbox` | Every permission granted to a program the runtime starts is enforced by the operating system, shown by running programs that try to exceed it. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `script` + `suite` + `heldout` |
+| `gate-membrane` | Material that only suggests what might be true is never counted as evidence: before any run starts, such material is planted in a throwaway copy of the evidence store, and both the check that traces evidence to its source and the step that merges findings must refuse it and name it as advice, each judged on its own. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `script` + `suite` + `heldout` |
+| `gate-reviewer` | The review step is independent of the work it reviews, and its code still does what its written specification says. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `plants` + `heldout` |
+| `gate-provenance` | A quotation in the evidence for a finding matches, exactly, something the runtime archived, and output the runtime captured itself is never reported as material somebody handed it. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `script` + `heldout` |
+| `gate-heldout` | No change has ever moved a gate and its held-out control together, and, when the controls are handed to it, each matches the SHA-256 digest it is pinned to. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `plants` + `heldout` |
+| `gate-swap` | The software that produces the work under inspection can be replaced by changing one line, and nothing else in the runtime changes. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
+| `gate-bindings` | Every skill a role says it relies on exists in the skills library the role is paired with. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `plants` + `heldout` |
+| `gate-permissions` | The tools each role asks for and the most the runtime ever allows reconcile: a role gets no more than both permit. | current | 2026-10-05T04:17:02Z | 14 | 30 days | `suite` + `heldout` |
 
-**315 proofs on record**, from 24 runs between 2026-09-21T22:13:19Z and 2026-09-28T04:17:05Z: 2 out of tolerance, 5 void rows. Every control is written by the operator, so this is
+**342 proofs on record**, from 25 runs between 2026-09-21T22:13:19Z and 2026-10-05T04:17:02Z: 2 out of tolerance, 5 void rows. Every control is written by the operator, so this is
 self-calibration, and it is called that: the defects the gates are proven
 against are the operator's own choice, and nobody else has approved them.
 
@@ -458,7 +458,7 @@ self-calibration, and the records say so.
 ## Evidence log
 
 Commitments to the records the runtime issues, appended and never
-rewritten, in [`log/`](log/). **4 checkpoints and 64 leaves; the latest is checkpoint 4, at 2026-09-28T04:17:05Z, root `3c949b8557091e101ab155ea7ad4d6b5f8a0f0b98376f557a7e705c426039a47`.** 4 of 4 checkpoints carry a timestamp token.
+rewritten, in [`log/`](log/). **5 checkpoints and 80 leaves; the latest is checkpoint 5, at 2026-10-05T04:17:02Z, root `4bc130507fc4295e1c23a6ef9287e1fc017038a4d92ba405b376c1abcbac2c0c`.** 5 of 5 checkpoints carry a timestamp token.
 
 ### What a leaf is
 
@@ -841,7 +841,7 @@ Citation File Format, from which GitHub offers "Cite this repository". The
 records change every week, so cite the commit or the date of the state you
 used:
 
-> Ashforde OÜ (2026). *Aero Harness operator records* [Data set], as of 2026-09-28. https://github.com/ashfordeOU/aero-harness-records
+> Ashforde OÜ (2026). *Aero Harness operator records* [Data set], as of 2026-10-05. https://github.com/ashfordeOU/aero-harness-records
 
 ## Licence
 
