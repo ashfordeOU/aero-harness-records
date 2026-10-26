@@ -28,8 +28,8 @@ repository-code: "https://github.com/ashfordeOU/aero-harness-records"
 license:
   - CC-BY-4.0
   - Apache-2.0
-version: "2026-10-19"
-date-released: "2026-10-19"
+version: "2026-10-26"
+date-released: "2026-10-26"
 keywords:
   - calibration
   - inspection
